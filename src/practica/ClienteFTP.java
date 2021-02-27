@@ -137,20 +137,20 @@ public class ClienteFTP extends JFrame
 		botonCargar.setBounds(350, 255, 150, 30);
 		add(botonCargar);
 
-		botonCreaDir.setBounds(550, 255, 150, 30);
+		botonDescargar.setBounds(550, 255, 150, 30);
+		add(botonDescargar);
+		
+		botonCreaDir.setBounds(350, 305, 150, 30);
 		add(botonCreaDir);
 
-		botonDelDir.setBounds(350, 305, 150, 30);
+		botonDelDir.setBounds(550, 305, 150, 30);
 		add(botonDelDir);
-
-		botonDescargar.setBounds(550, 305, 150, 30);
-		add(botonDescargar);
 
 		botonBorrar.setBounds(350, 355, 150, 30);
 		add(botonBorrar);
 
-		botonSalir.setBounds(550, 355, 150, 30);
-		add(botonSalir);
+		botonVolver.setBounds(550, 355, 150, 30);
+		add(botonVolver);
 		
 		botonRenoDir.setBounds(350, 405, 150, 30);
 		add(botonRenoDir);
@@ -158,8 +158,8 @@ public class ClienteFTP extends JFrame
 		botonReno.setBounds(550, 405, 150, 30);
 		add(botonReno);
 		
-		botonVolver.setBounds(350,455,150,30);
-		add(botonVolver);
+		botonSalir.setBounds(450, 455, 150, 30);
+		add(botonSalir);
 		//se a�aden el resto de los campos de pantalla
 		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -236,7 +236,6 @@ public class ClienteFTP extends JFrame
 				}
 			}
 		});// Botón renombrar archivo
-		
 		botonVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				listaDirec.removeAll();
@@ -260,7 +259,6 @@ public class ClienteFTP extends JFrame
 				}
 			}
 		});
-
 		listaDirec.addMouseListener(new MouseAdapter()
 		{
 			public void mouseClicked(MouseEvent e) {
@@ -284,7 +282,6 @@ public class ClienteFTP extends JFrame
 				}
 			}
 		});
-		
 		botonSalir.addActionListener(new ActionListener() 
 		{
 			@Override
@@ -378,8 +375,7 @@ public class ClienteFTP extends JFrame
 				} 
 				// final del if
 			}
-		}); 
-		//final del bot�n Eliminar Carpeta
+		}); //final del bot�n Eliminar Carpeta
 		botonCargar.addActionListener(new ActionListener()
 		{
 			@Override
@@ -432,12 +428,17 @@ public class ClienteFTP extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				String directorio = direcSelec;
-				if (!direcSelec.equals("/"))
-					directorio = directorio + "/";
-				if (!direcSelec.equals("")) 
-				{
-					BorrarFichero(directorio + ficheroSelec,ficheroSelec);
+				String fichero = listaDirec.getSelectedValue().toString();
+				if(fichero.contains("(DIR)")) {
+					JOptionPane.showMessageDialog(null, fichero + "--> No es una FICHERO");
+				} else {
+					String directorio = direcSelec;
+					if (!direcSelec.equals("/"))
+						directorio = directorio + "/";
+					if (!direcSelec.equals("")) 
+					{
+						BorrarFichero(directorio + ficheroSelec,ficheroSelec);
+					}
 				}
 			}
 		});
